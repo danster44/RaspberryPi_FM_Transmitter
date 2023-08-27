@@ -85,7 +85,7 @@ RoomOnFire_dict = {
 
                  3: "Automatic Stop",
 
-                 4: "12:51",
+                 4: "1251",
 
                  5: "You Talk Way Too Much",
 
@@ -215,6 +215,23 @@ TheNewAbnormal_dict = {
 
                  9: "Ode to the Mets" }
 
+Track7_dict = { 
+              1: ""
+              2: ""
+              3: ""
+              4: ""
+              5: ""
+              6: ""
+              7: ""
+              8: ""
+              9: ""
+              10:
+              11:
+              12:
+              13:
+              14:
+              15:
+  
 #Declare a song library as well, these are just key pair matches I use later for the lrc files located in lrc_lib. 
 song_lib = {
 
@@ -232,7 +249,7 @@ song_lib = {
     "What Ever Happened": "lrc_lib/What_Ever_Happened.lrc",
     "Reptilia": "lrc_lib/Reptilia.lrc",
     "Automatic Stop": "lrc_lib/Automatic_Stop.lrc",
-    "12:51": "lrc_lib/12:51.lrc",
+    "1251": "lrc_lib/1251.lrc",
     "You Talk Way Too Much": "lrc_lib/You_Talk_Way_Too_Much.lrc",
     "Between Love And Hate": "lrc_lib/Between_Love_And_Hate.lrc",
     "Meet Me in the Bathroom": "lrc_lib/Meet_Me_in_the_Bathroom.lrc",
@@ -269,7 +286,7 @@ song_lib = {
     "One Way Trigger": "lrc_lib/One_Way_Trigger.lrc",
     "Welcome to Japan": "lrc_lib/Welcome_to_Japan.lrc",
     "80's Comedown Machine": "lrc_lib/80's_Comedown_Machine.lrc",
-    "50/50": "lrc_lib/50/50.lrc",
+    "5050": "lrc_lib/5050.lrc",
     "Slow Animals": "lrc_lib/Slow_Animals.lrc",
     "Partners in Crime": "lrc_lib/Partners_in_Crime.lrc",
     "Chances": "lrc_lib/Chances.lrc",
@@ -394,9 +411,11 @@ def get_album(selectedDisk):
 
             album = "Comedown Machine"
 
-        else:
+        elif selectedDIsk == 6:
 
             album = "The New Abnormal"
+        else:
+            album = "===Track 7==="
 
         return album
 
@@ -439,10 +458,13 @@ def get_track(selectedDisk, selectedTrack):
 
             track = ComedownMachine_dict[selectedTrack]
 
-        else:
-
+        elif selectedDisk == 6:
+          
             track = TheNewAbnormal_dict[selectedTrack]
-
+        else:
+          
+            track = Track7_dict[selectedTrack]
+          
         return track
 
     else:
@@ -451,30 +473,36 @@ def get_track(selectedDisk, selectedTrack):
 
 selected = 0
 
-
 try:
         while True:
+
+          #shutdown
                 if GPIO.input(12) == False:
                         os.system('sudo shutdown -h now')
+                  
                 if GPIO.input(19) == False:
-                        if currentDisk >= 6:
+
+                        #check for overflow, increment, clear, and print.
+                        if currentDisk >= 7:
                                 currentDisk = 0
                         currentDisk = currentDisk + 1
                         clearUpper()
                         lcd.message = f"Current Disk is {currentDisk}"
-                        time.sleep(0.2)
+                        time.sleep(0.2) #debounce, make lower if you want faster buttons
 
                 if GPIO.input(21) == False:
+
+                      #same as above input 19.
                         if currentTrack >= 15:
                                 currentTrack = 0
                         currentTrack = currentTrack + 1
                         clearLower()
                         lcd.message = f"\nCurrent Track is {currentTrack}"
                         time.sleep(0.2)
+                  
                 if GPIO.input(26) == False:
-                        clearLCD()
+                        lcd.clear()
 
-                        selected = 1
                         selectedTrack = copy.deepcopy(currentTrack)
                         selectedDisk = copy.deepcopy(currentDisk)
 
