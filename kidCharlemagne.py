@@ -216,21 +216,21 @@ TheNewAbnormal_dict = {
                  9: "Ode to the Mets" }
 
 Track7_dict = { 
-              1: ""
-              2: ""
-              3: ""
-              4: ""
-              5: ""
-              6: ""
-              7: ""
-              8: ""
-              9: ""
-              10:
-              11:
-              12:
-              13:
-              14:
-              15:
+              1: "Smooth Operator",
+              2: "Kiss the Sky",
+              3: "Games People Play",
+              4: "Sunshine of Your Love",
+              5: "Veteran of the Psychic Wars",
+              6: "Marquee Moon",
+              7: "Do It Again",
+              8: "Sniffin' the Tears",
+              9: "Baby Blue",
+              10: "A Horse With No Name",
+              11: "Sultans of Swing",
+              12: "Hold The Line",
+              13: "One of These Nights",
+              14: "Witchy Woman",
+              15: "Black Magic Woman" }
   
 #Declare a song library as well, these are just key pair matches I use later for the lrc files located in lrc_lib. 
 song_lib = {
@@ -301,7 +301,23 @@ song_lib = {
     "At the Door": "lrc_lib/At_the_Door.lrc",
     "Why are Sundays So Depressing": "lrc_lib/Why_are_Sundays_So_Depressing.lrc",
     "Not the Same Anymore": "lrc_lib/Not_the_Same_Anymore.lrc",
-    "Ode to the Mets": "lrc_lib/Ode_to_the_Mets.lrc"
+    "Ode to the Mets": "lrc_lib/Ode_to_the_Mets.lrc",
+    "Smooth Operator" : "lrc_lib/Smooth_Operator.lrc",
+    "Kiss the Sky" : "lrc_lib/Kiss_the_Sky.lrc",
+    "Games People Play" : "lrc_lib/Games_People_Play.lrc",
+    "Sunshine of Your Love" : "lrc_lib/Sunshine_of_Your_Love.lrc",
+    "Veteran of the Psychic Wars" : "lrc_lib/Veteran_of_the_Psychic_Wars.lrc",
+    "Marquee Moon" : "lrc_lib/Marquee_Moon.lrc",
+    "Do It Again" : "lrc_lib/Do_It_Again.lrc",
+    "Sniffin' the Tears" : "lrc_lib/Sniffin'_the_Tears.lrc",
+    "Baby Blue" : "lrc_lib/Baby_Blue.lrc",
+    "A Horse With No Name" : "lrc_lib/A_Horse_With_No_Name.lrc",
+    "Sultans of Swing" : "lrc_lib/Sultans_of_Swing.lrc",
+    "Hold The Line" : "lrc_lib/Hold_The_Line.lrc",
+    "One of These Nights" : "lrc_lib/One_of_These_Nights.lrc",
+    "Witchy Woman" : "lrc_lib/Witchy_Woman.lrc",
+    "Black Magic Woman" : "lrc_lib/Black_Magic_Woman.lrc"
+        
 }
 
 #Reads a lrc file from a filename, in the Song_or_Title.lrc format
@@ -389,7 +405,7 @@ def underscores(track: str) ->str:
 #gets the album from the number 
 def get_album(selectedDisk):
 
-    if 0 <= selectedDisk < 7:
+    if 0 <= selectedDisk < 8:
 
         if selectedDisk == 1:
 
@@ -436,7 +452,7 @@ def clearLower():
 
 def get_track(selectedDisk, selectedTrack):
 
-    if 0 <= selectedDisk < 7 and 0 <= selectedTrack < 15:
+    if 0 <= selectedDisk < 8 and 0 <= selectedTrack < 15:
 
         if selectedDisk == 1:
 
@@ -483,7 +499,7 @@ try:
                 if GPIO.input(19) == False:
 
                         #check for overflow, increment, clear, and print.
-                        if currentDisk >= 7:
+                        if currentDisk >= 8:
                                 currentDisk = 0
                         currentDisk = currentDisk + 1
                         clearUpper()
